@@ -116,20 +116,38 @@
 
 			  	{% if matches %}
 			  		<div class="row" style ="height: 30px !important"></div>
+			  		<table class="table table-striped table-hover">
+			  		<thead class="thead-dark">
+					    <tr>
+					      <th class="text-left">Game </th>
+					      <th class="text-left">Date <br /> Time (BST)</th>
+					      <th class="text-right">Team I <br /> (Points)</th>
+					      <th class="text-right"></th>
+					      <th class="text-middle">Score</th>
+					      <th class="text-left"></th>
+					      <th class="text-left">Team II <br /> (Points)</th>
+					    </tr>
+					  </thead>
+					  <tbody>
 
 					{% for m in matches %}
 						{% if m.team_one and m.team_two %} 
-						<div class="row" class="hover_div">
-							<div class="col-sm-1">{{ m.match_order }}</div>
-							<div class="col-sm-3 font-weight-bold"><span class="align-middle">{% if m.date %} {{ m.date }} {% endif %} <br />{% if m.time %}{{ m.time }} {% endif %}</span></div>
-							<div class="col-sm-2 align-middle font-weight-bold text-right text-uppercase" style="font-size: large;"><span class="align-middle">{{ m.team_one.team }}</span><br />
+						<tr>
+						      <th class="text-left">{{ m.match_order }}</th>
+						      <th class="text-left">
+						      	<span class="align-middle">{% if m.date %} {{ m.date }} {% endif %} <br />{% if m.time %}{{ m.time }} {% endif %}</span>
+						      </th>
+						      <th class="text-right text-uppercase" style="font-size: large;">
+						      	<span class="align-middle">{{ m.team_one.team }}</span><br />
 							{% if m.team_one.point or m.team_two.point %}
 									<span class="small font-italic">({{ m.team_one.point }})</span>
 							{% endif %} 
-							</div>
-							<div class="col-sm-1"><img src="https://api.fifa.com/api/v1/picture/flags-fwc2018-4/{{ m.team_one.team.country_code }}" width="100%" height="40px"/></div>
-							<div class="col-sm-1 text-center align-middle " style="font-size: large;">
-								{% if m.team_one.goal or m.team_two.goal %}
+						      </th>
+						      <th class="text-right">
+						      	<img src="https://api.fifa.com/api/v1/picture/flags-fwc2018-4/{{ m.team_one.team.country_code }}" width="60px" height="40px"/>
+						      </th>
+						      <th class="text-middle text-uppercase" style="font-size: large;">
+						      	{% if m.team_one.goal or m.team_two.goal %}
 									<span class="font-weight-bold">{{ m.team_one.goal }}</span>
 								{% else %} 
 									- 
@@ -142,19 +160,22 @@
 								{% else %} 
 									- 
 								{% endif %} 
-							</div>
-							<div class="col-sm-1"><img src="https://api.fifa.com/api/v1/picture/flags-fwc2018-4/{{ m.team_two.team.country_code }}" width="100%" height="40px"/></div>
-							<div class="col-sm-2 align-middle font-weight-bold text-left text-uppercase" style="font-size: large;"><span class="align-middle">{{ m.team_two.team }}</span><br />
+						      </th>
+						      <th class="text-left">
+						      	<img src="https://api.fifa.com/api/v1/picture/flags-fwc2018-4/{{ m.team_two.team.country_code }}" width="60px" height="40px"/>
+						      </th>
+						      <th class="text-left text-uppercase" style="font-size: large;">
+						      	{{ m.team_two.team }}</span><br />
 							{% if m.team_one.point or m.team_two.point %}
 									<span class="small font-italic">({{ m.team_two.point }})</span>
 							{% endif %}
-							</div>
-						</div>
-						<div class="row" style ="height: 15px !important"></div>
-						<div class="row" style ="height: 15px !important"></div>
+						      </th>
+						    </tr>
 
 						{% endif %}
 					{% endfor %}
+				</tbody>
+				</table>
 			  	{% else %}
 				    <p>No matches are available.</p>
 				{% endif %}
