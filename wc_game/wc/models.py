@@ -40,20 +40,30 @@ class Team(models.Model):
         self.gd = int(self.goal) - int(self.concede)
         if self.goal > self.concede:
             self.win = 1
+            self.loss = 0
+            self.draw = 0
             self.point = 3
         elif self.goal < self.concede:
             self.loss = 1
+            self.win = 0
+            self.draw = 0
             self.point = 0
         else:
             if self.pen_for > self.pen_agn:
                 self.win = 1
                 self.point = 3
+                self.loss = 0
+                self.draw = 0
             elif self.pen_for < self.pen_agn:
                 self.loss = 1
+                self.win = 0
+                self.draw = 0
                 self.point = 0
             else:
                 self.draw = 1
                 self.point = 1
+                self.win = 0
+                self.loss = 0
         super(Team, self).save(*args, **kwargs)
 
 
