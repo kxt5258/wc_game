@@ -147,7 +147,7 @@
 						      	<img src="https://api.fifa.com/api/v1/picture/flags-fwc2018-4/{{ m.team_one.team.country_code }}" width="60px" height="40px"/>
 						      </td>
 						      <td class="text-middle ">
-						      	{% if m.team_one.goal or m.team_two.goal %}
+						      	{% if m.team_one.goal > -1 or m.team_two.goal > -1 %}
 									<span class="font-weight-bold" style="font-size: large;">{{ m.team_one.goal }} : {{ m.team_two.goal }}</span>
 								{% else %} 
 									<span class="font-weight-bold" style="font-size: large;">- : -</span>
