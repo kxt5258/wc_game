@@ -13,13 +13,17 @@ def index(request):
     standings = []
     for p in players:
         one = Team.objects.raw("select id, sum(point) as points, sum(goal) as goal, sum(concede) as concede, sum(gd) as gd, \
-                                sum(win) as win, sum(loss) as loss, sum(draw) as draw, sum(gd) as gd from wc_team where team_id = \'" + str(p.team_one_id) + "\'")
+                                sum(win) as win, sum(loss) as loss, sum(draw) as draw, sum(gd) as gd from wc_team \
+                                where team_id = \'" + str(p.team_one_id) + "\'")
         two = Team.objects.raw("select id, sum(point) as points, sum(goal) as goal, sum(concede) as concede, sum(gd) as gd, \
-                                sum(win) as win, sum(loss) as loss, sum(draw) as draw, sum(gd) as gd from wc_team where team_id = \'" + str(p.team_two_id) + "\'")
+                                sum(win) as win, sum(loss) as loss, sum(draw) as draw, sum(gd) as gd from wc_team \
+                                where team_id = \'" + str(p.team_two_id) + "\'")
         three = Team.objects.raw("select id, sum(point) as points, sum(goal) as goal, sum(concede) as concede, sum(gd) as gd, \
-                                sum(win) as win, sum(loss) as loss, sum(draw) as draw, sum(gd) as gd from wc_team where team_id = \'" + str(p.team_three_id) + "\'")
+                                sum(win) as win, sum(loss) as loss, sum(draw) as draw, sum(gd) as gd from wc_team \
+                                where team_id = \'" + str(p.team_three_id) + "\'")
         four = Team.objects.raw("select id, sum(point) as points, sum(goal) as goal, sum(concede) as concede, sum(gd) as gd, \
-                                sum(win) as win, sum(loss) as loss, sum(draw) as draw, sum(gd) as gd from wc_team where team_id = \'" + str(p.team_four_id) + "\'")
+                                sum(win) as win, sum(loss) as loss, sum(draw) as draw, sum(gd) as gd from wc_team \
+                                where team_id = \'" + str(p.team_four_id) + "\'")
 
         total = int(one[0].points) + int(two[0].points) + int(three[0].points) + int(four[0].points)
         goals = int(one[0].goal if one[0].goal else 0) + int(two[0].goal if two[0].goal else 0) + int(three[0].goal if three[0].goal else 0) + \

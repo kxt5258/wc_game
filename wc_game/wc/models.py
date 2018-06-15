@@ -24,6 +24,8 @@ class Team(models.Model):
     team = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="team")
     goal = models.IntegerField(blank=True, null=True)
     concede = models.IntegerField(blank=True, null=True, default=0)
+    pen_for = models.IntegerField(blank=True, null=True, default=0)
+    pen_agn = models.IntegerField(blank=True, null=True, default=0)
     gd = models.IntegerField(blank=True, null=True, default=0)
     point = models.IntegerField(default=0)
     win = models.IntegerField(default=0)
@@ -43,8 +45,15 @@ class Team(models.Model):
             self.loss = 1
             self.point = 0
         else:
-            self.draw = 1
-            self.point = 1
+            if self.pen_for > self.pen_agn:
+                self.win = 1
+                self.point = 3
+            elif self.pen_for < self.pen_agn:
+                self.loss = 1
+                self.point = 0
+            else:
+                self.draw = 1
+                self.point = 1
         super(Team, self).save(*args, **kwargs)
 
 
