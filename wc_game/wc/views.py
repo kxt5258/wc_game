@@ -33,12 +33,13 @@ def index(request):
         win = int(one[0].win) + int(two[0].win) + int(three[0].win) + int(four[0].win)
         loss = int(one[0].loss) + int(two[0].loss) + int(three[0].loss) + int(four[0].loss)
         draw = int(one[0].draw) + int(two[0].draw) + int(three[0].draw) + int(four[0].draw)
+        games = win + loss + draw
 
         standings.append({"name": p.player_name, "one": one[0].points, "two": two[0].points, "three": three[0].points, "four": four[0].points,
                           "win": win, "loss": loss, "draw": draw,
-                          "goals": goals, "gas": gas, "gds": gds, "total": total})
+                          "goals": goals, "gas": gas, "gds": gds, "total": total, "games": games})
 
-        sorted_standing = sorted(standings, key=lambda x: (x['total'], x['gds'], x['goals'], x['gas']), reverse=True)
+        sorted_standing = sorted(standings, key=lambda x: (x['total'], x['gds'], x['goals'], -x['gas']), reverse=True)
 
     context['matches'] = matches
     context['players'] = players
