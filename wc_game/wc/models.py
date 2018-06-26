@@ -37,7 +37,7 @@ class Team(models.Model):
         return self.match_order
 
     def save(self, *args, **kwargs):
-        if self.goal and self.concede:
+        if self.goal is not None and self.concede is not None:
             self.gd = int(self.goal) - int(self.concede)
             if self.goal > self.concede:
                 self.win = 1
